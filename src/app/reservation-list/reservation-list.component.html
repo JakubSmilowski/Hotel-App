@@ -1,0 +1,19 @@
+
+<h2>Reservation List:</h2>
+<!-- here we make a statement that shows the noReservation template when no reservations -->
+<ul *ngIf="reservations.length; else noReservation">
+    <li *ngFor="let reservation of reservations; index as i">
+        Guest: {{reservation.guestName}} <br>
+        Email: {{reservation.guestEmail}} <br>
+        Room No: {{reservation.roomNumber}} <br>
+        Check-In Date: {{reservation.checkInDate}} <br>
+        Check-Out Date: {{reservation.checkOutDate}} <br>
+        <button (click)="deleteReservation(reservation.id)">Delete</button>
+        <button [routerLink]="['/edit', reservation.id]">Edit</button>
+    </li>
+</ul>
+
+<!-- THIS is only the template visible only when called -->
+<ng-template #noReservation>
+    <p>No reservations available.</p>
+</ng-template>

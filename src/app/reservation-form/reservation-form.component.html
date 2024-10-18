@@ -1,0 +1,49 @@
+    <!-- Here we make use of responsive validation, we need to import 
+    import { FormBuilder, FormGroup, Validators } from '@angular/forms'; into reservation form component. We also have to 
+    import import { FormsModule, ReactiveFormsModule } from '@angular/forms'; into reservation module. -->
+   
+
+    <!-- Here we assign a fromGroup from reservationcomponent.ts --> 
+     <!-- we make use of that form in html is submitable and assign sumbition of a form to a function onSubmit -->
+    <form [formGroup]="reservationForm" (ngSubmit)="onSubmit()">  
+        <div>
+            <!-- Here we define a structure of a form component-->
+             <!-- We have to choose type of a input and also assign it a name so we can later validate it in the 
+            reservation-form-component  -->
+            <label>Check-In Date:</label>
+            <input type="date" formControlName="checkInDate">
+            <!-- We use a angular *ngIf statment and we check if the for valid and if the user did smth to the form -->
+            <div *ngIf="reservationForm.get('checkInDate')?.invalid && reservationForm.get('checkInDate')?.touched">
+                Check-In Date is required.
+            </div>
+        </div>
+        <div>
+            <label>Check-Out Date:</label>
+            <input type="date" formControlName="checkOutDate">
+            <div *ngIf="reservationForm.get('checkOutDate')?.invalid && reservationForm.get('checkOutDate')?.touched">
+                Check-Out Date is required.
+            </div>
+        </div>
+        <div>
+            <label>Guest Name:</label>
+            <input type="text" formControlName="guestName">
+            <div *ngIf="reservationForm.get('guestName')?.invalid && reservationForm.get('guestName')?.touched">
+                Guest Name is required.
+            </div>
+        </div>
+        <div>
+            <label>Guest Email:</label>
+            <input type="email" formControlName="guestEmail">
+            <div *ngIf="reservationForm.get('guestEmail')?.invalid && reservationForm.get('guestEmail')?.touched">
+                Guest Email is required.
+            </div>
+        </div>
+        <div>
+            <label>Room Number:</label>
+            <input type="number" formControlName="roomNumber">
+            <div *ngIf="reservationForm.get('roomNumber')?.invalid && reservationForm.get('roomNumber')?.touched">
+                Room Number is required.
+            </div>
+        </div>
+        <button type="submit" [disabled]="reservationForm.invalid">Submit</button>        
+    </form>
