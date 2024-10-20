@@ -36,29 +36,25 @@ export class ReservationService{
     return this.http.get<Reservation[]>(this.apiUrl + "/reservations");
   }
 
-  getReservation(id:string): Reservation | undefined {
-    return this.reservations.find(res => res.id == id);
+  //Here we return observable type reservations
+  getReservation(id:string): Observable<Reservation>{
+    return this.http.get<Reservation>(this.apiUrl + "/reservation/"+id);
   }
 
   //we push the reservation the this function recives into the reservations list
-  addReservation(reservation: Reservation): void {
-    reservation.id = Date.now().toString( );
+  addReservation(reservation: Reservation): Observable<void> {
+    return this.http.post<void>(this.apiUrl + "/reservation", reservation);
 
-    this.reservations.push(reservation);
-    console.log(this.reservations);
-    // this.saveToLocalStorage();
   }
 
-  deleteReservation(id: string): void {
-    let index = this.reservations.findIndex(res => res.id === id)
-    this.reservations.splice(index,1);
-    // this.saveToLocalStorage();
+  deleteReservation(id: string): Observable<void> {
+
+    return this.http.delete<void>(this.apiUrl + "/reservation/"+id);
   }
 
-  updateReservation(id: string, updatedReservation: Reservation): void {
-    let index = this.reservations.findIndex(res => res.id === id);
-    this.reservations[index] = updatedReservation;
-    // this.saveToLocalStorage();
+  updateReservation(id: string, updatedReservation: Reservation): Observable<void> {
+    return this.http.put<void>(this.apiUrl + "/reservation/"+id, updatedReservation);
+
   }
 
   // saveToLocalStorage(){
