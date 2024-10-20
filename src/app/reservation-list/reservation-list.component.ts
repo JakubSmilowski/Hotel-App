@@ -18,9 +18,11 @@ export class ReservationListComponent implements OnInit {
 
   }
 
-  //And on init we update the list with the values from local storage.
-  ngOnInit(): void {
-    this.reservations = this.reservationService.getReservations();
+  //And on init we update the list with the values from  api
+  ngOnInit(): void { 
+    this.reservationService.getReservations().subscribe(reservations =>
+      { this.reservations = reservations }) 
+
   }
 
   deleteReservation(id: string) {

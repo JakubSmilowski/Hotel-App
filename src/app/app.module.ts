@@ -1,10 +1,13 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeModule } from './home/home.module';
 import { ReservationModule } from './reservation/reservation.module';
+
 
 @NgModule({
   declarations: [
@@ -15,6 +18,7 @@ import { ReservationModule } from './reservation/reservation.module';
     AppRoutingModule,
     HomeModule,
     ReservationModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
